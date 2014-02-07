@@ -5,7 +5,7 @@ namespace assertions;
 $assert = new assert;
 $assert->this("car")->is->a("car"); 
 $assert->this($var)->is->equleto($var2)->and()->lessthen("300"); 
-$assert->this($object)->has->a("get_var")->method()->and()->a("setting")->property()->report();
+$assert->this($object)->has->a("get_var")->method()->has()->a("setting")->property()->which->returns(10)->report();
 */
 
 
@@ -460,7 +460,8 @@ class true{
 	public function and(){
 		return new $this->class($this->item);
 	}
-	public function whos(){
+	public function which ($value){
+
 		
 	}
 	public function report(){
