@@ -5,7 +5,7 @@ namespace assertions;
 $assert = new assert;
 $assert->this("car")->is->a("car"); 
 $assert->this($var)->is->equleto($var2)->and()->lessthen("300"); 
-$assert->this($object)->has->a("get_var")->method()->which->has->a("setting")->property()->which->returns(10)->report();
+$assert->this($object)->has->a("get_var")->method()->which->has->a("setting")->property()->which->returns->a->report();
 
 */
 
@@ -39,9 +39,32 @@ class this{
 	public $isnot = new isnot($item);
 	public $has = new has($item);
 	public $hasnot= new hasnot($item);
+	
 
 	public function __construct($item){
 		$this->item = $item;
+	}
+	
+	public function returns($function){
+		return new returns($this->item,$function);
+	}
+
+}
+
+class returns{
+	private $returns;
+
+	public function __construct($item,$value){
+		$args = func_get_args();
+		for ($x=0; $x<2; $x++){
+
+			unset($args[$x]);
+		}
+		$args = array_values($args);
+
+		$returns =call_user_func_array(array($item,$value),$args);
+		
+		return new this($returns);
 	}
 
 }
