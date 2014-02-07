@@ -5,7 +5,8 @@ namespace assertions;
 $assert = new assert;
 $assert->this("car")->is->a("car"); 
 $assert->this($var)->is->equleto($var2)->and()->lessthen("300"); 
-$assert->this($object)->has->a("get_var")->method()->has()->a("setting")->property()->which->returns(10)->report();
+$assert->this($object)->has->a("get_var")->method()->which->has->a("setting")->property()->which->returns(10)->report();
+
 */
 
 
@@ -39,9 +40,10 @@ class this{
 	public $has = new has($item);
 	public $hasnot= new hasnot($item);
 
-	function __construct($item){
+	public function __construct($item){
 		$this->item = $item;
 	}
+
 }
 
 class is{
@@ -431,6 +433,7 @@ class a{
 
 class false{
 	private $item, $class, $e;
+	public  $which;
 
 	public function __construct($item,$e,$class){
 		$this->item = $item;
@@ -450,19 +453,20 @@ class false{
 
 class true{
 
-	private $item, $class;
+	private $item, $class, $function;
+	public  $which;
 
 	public function __construct($item,$class,$function=null){
 		$this->item = $item;
 		$this->class = $class;
+		$this->function = $function;
+		$this->which = new this($item);
 	}
 
 	public function and(){
 		return new $this->class($this->item);
 	}
-	public function which ($value){
-
-		
+			
 	}
 	public function report(){
 		
